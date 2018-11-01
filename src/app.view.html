@@ -3,18 +3,57 @@
     <h3 class="layout-title col">Adcash test assignment</h3>
     <h5 class="layout-subtitle col">Type tags here using comma, semicolon and line breaks as delimiters</h5>
   </div>
-  <div class="tags-textarea-container row">
-    <textarea id="tags-text" class="tags-textarea col col-xs-12 col-md-6"></textarea>
+  <div class="tags-textarea-container form-group row">
+    <textarea id="tags-text" data-bind="value: tagsTextArea" class="tags-textarea form-control col col-xs-12 col-md-6"
+      placeholder="Enter list of tag names here"></textarea>
   </div>
   <div class="row">
-    <button id="add-tags-button" class="add-tags-button btn btn-primary col col-xs-12 col-sm-2">Add Tags</button>
+    <button id="add-tags-button" data-bind="click: addTagsFromText" class="add-tags-button btn btn-primary col col-xs-12 col-sm-2">
+      Add Tags
+    </button>
   </div>
   <div class="tag-list-container row">
-    <ul class="tags-list col col-xs-12 col-md-6">
-      <li class="tags-list__tag"></li>
+    <ul data-bind="foreach: tagsList" class="tags-list col col-xs-12 col-md-6">
+      <li data-bind="css: tagColor" class="tags-list__tag">
+        <span data-bind="text: tagLabel" class="tags-list__tag__label"></span>
+        <span data-bind="click: deleteTag($index)" class="tags-list__tag__close"></span>
+      </li>
     </ul>
   </div>
   <div class="row">
-    <button id="add-tags-button" class="add-tags-button btn btn-primary col col-xs-12 col-sm-2">Edit Tags</button>
+    <button id="edit-tags-button" class="add-tags-button btn btn-primary col col-xs-12 col-sm-2" data-toggle="modal"
+      data-target="#edit-tags-modal" data-bind="click: showEditModel">
+      Edit Tags
+    </button>
+  </div>
+
+  <!-- Modal -->
+  <div class="modal-backdrop hide fade" data-bind="css: {'show in': showModal}, click: showModal(false)"></div>
+  <div id="edit-tags-modal" class="modal fade" role="dialog" data-bind="css: {'show in': showModal}">
+    <div class="modal-dialog">
+
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal" data-bind="click: showModal(false)">&times;</button>
+          <h4 class="modal-title">Edit Tags</h4>
+        </div>
+        <div class="modal-body">
+          <div class="tags-textarea-container form-group row">
+            <textarea id="tags-text" data-bind="value: allTagsText" class="tags-textarea form-control col col-xs-12 col-md-6"
+              placeholder="Enter list of tag names here"></textarea>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <div class="row">
+            <button id="save-tags-button" data-bind="click: saveTagsFromText" class="save-tags-button btn btn-primary col col-xs-12 col-sm-3"
+              data-dismiss="modal">
+              Save Tags
+            </button>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </div>
