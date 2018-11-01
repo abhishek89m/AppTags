@@ -15,3 +15,13 @@ Functionalities are as follows :
   6. If the user refreshes the page, the saved tags list is restored from the localstorage.
     * This is not possible in browsers where the HTML5 Storage APIs are not supported. In such cases the tags list is not saved.
     * The tags listed in the text area, but not added to the list are ignored while saving.
+
+Steps to run :
+  1. Prerequisite - Need NodeJS, and NPM installed.
+  2. Check for the versions of NodeJS and NPM through the -v option in terminal or powershell.
+  3. Git clone the repo in filesystem and navigate to it in terminal or powershell.
+  4. Run the command 'npm start'
+  5. Open any browser (preferably Chrome) and go to 'http://localhost:8080/'
+  6. The demo will run.
+
+Alternatively, after step 4, copy the contents of dist to webroot folder of any webservice like Apcahe Tomcat, and run it.
