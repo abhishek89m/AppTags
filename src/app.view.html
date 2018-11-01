@@ -4,7 +4,7 @@
     <h5 class="layout-subtitle col">Type tags here using comma, semicolon and line breaks as delimiters</h5>
   </div>
   <div class="tags-textarea-container form-group row">
-    <textarea id="tags-text" data-bind="value: tagsTextArea" class="tags-textarea form-control col col-xs-12 col-md-6"
+    <textarea id="add-tags-text" data-bind="value: tagsTextArea" class="tags-textarea form-control col col-xs-12 col-md-6"
       placeholder="Enter list of tag names here"></textarea>
   </div>
   <div class="row">
@@ -16,13 +16,12 @@
     <ul data-bind="foreach: tagsList" class="tags-list col col-xs-12 col-md-6">
       <li data-bind="css: tagColor" class="tags-list__tag">
         <span data-bind="text: tagLabel" class="tags-list__tag__label"></span>
-        <span data-bind="click: deleteTag($index)" class="tags-list__tag__close"></span>
+        <span data-bind="click: $parent.deleteTag($index)" class="tags-list__tag__close"></span>
       </li>
     </ul>
   </div>
   <div class="row">
-    <button id="edit-tags-button" class="add-tags-button btn btn-primary col col-xs-12 col-sm-2" data-toggle="modal"
-      data-target="#edit-tags-modal" data-bind="click: showEditModel">
+    <button id="edit-tags-button" class="add-tags-button btn btn-primary col col-xs-12 col-sm-2" data-bind="click: showEditModel, enable: tagsList().length">
       Edit Tags
     </button>
   </div>
@@ -40,7 +39,7 @@
         </div>
         <div class="modal-body">
           <div class="tags-textarea-container form-group row">
-            <textarea id="tags-text" data-bind="value: allTagsText" class="tags-textarea form-control col col-xs-12 col-md-6"
+            <textarea id="edit-tags-text" data-bind="value: allTagsText" class="tags-textarea form-control col col-xs-12 col-md-6"
               placeholder="Enter list of tag names here"></textarea>
           </div>
         </div>

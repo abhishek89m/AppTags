@@ -13,17 +13,19 @@ function appViewModel() {
 
   vm.tagsTextArea = ko.observable("");
   vm.allTagsText = ko.observable("");
-  vm.tagsList = ko.observableArray([]);
+  vm.tagsList = ko.observableArray(getTagsListFromCache());
   vm.showModal = ko.observable(false);
 
   vm.showEditModel = function () {
-    var tagLabelList = [];
-    for (var index = 0; index < vm.tagsList().length; index++) {
-      var tagLabel = vm.tagsList()[index].tagLabel;
-      tagLabelList.push(tagLabel);
+    if (vm.tagsList().length) {
+      var tagLabelList = [];
+      for (var index = 0; index < vm.tagsList().length; index++) {
+        var tagLabel = vm.tagsList()[index].tagLabel;
+        tagLabelList.push(tagLabel);
+      }
+      vm.allTagsText(tagLabelList.join(','));
+      vm.showModal(true);
     }
-    vm.allTagsText(tagLabelList.join(','));
-    vm.showModal(true);
   };
 
   vm.addTagsFromText = function () {
@@ -31,11 +33,36 @@ function appViewModel() {
   };
 
   vm.saveTagsFromText = function () {
-    if (vm.tagsList().length) {
-      setTagsFromText(vm.allTagsText, true);
-    }
+    setTagsFromText(vm.allTagsText, true);
     vm.showModal(false);
   };
+
+  vm.deleteTag = function (tagIndex) {
+    return function () {
+      var tagLabel = vm.tagsList()[tagIndex()].tagLabel;
+      if (confirm("Do you want to delete the tag with label '" + tagLabel + "'")) {
+        vm.tagsList.splice(tagIndex(), 1);
+      }
+    }
+  };
+
+  vm.tagsList.subscribe(function (newTagsList) {
+    if (typeof (Storage) !== "undefined") {
+      localStorage.setItem("tagsList", JSON.stringify(vm.tagsList()));
+    } else {
+      console.info("Unable to save tags in localstorage as the browser doesn't support it");
+    }
+  });
+
+  function getTagsListFromCache() {
+    var tagsList = [];
+    if (typeof (Storage) !== "undefined") {
+      tagsList = localStorage.getItem("tagsList") ? JSON.parse(localStorage.getItem("tagsList")) : [];
+    } else {
+      console.info("Unable to save tags in localstorage as the browser doesn't support it");
+    }
+    return tagsList;
+  }
 
   function setTagsFromText(tagsText, resetArray) {
     var tagsArray = tagsText().split(/[,\n;\r]/g);
@@ -50,15 +77,7 @@ function appViewModel() {
       if (tag !== '' && !isNaN(tag)) {
         vm.tagsList.push({
           tagLabel: tag,
-          tagColor: tag >= 0 ? 'redTag' : 'blueTag',
-          deleteTag: function (tagIndex) {
-            return function () {
-              var tagLabel = vm.tagsList()[tagIndex()].tagLabel;
-              if (confirm("Do you want to delete the tag with label '" + tagLabel + "'")) {
-                vm.tagsList.splice(tagIndex(), 1);
-              }
-            }
-          }
+          tagColor: tag >= 0 ? 'redTag' : 'blueTag'
         });
       }
     }
