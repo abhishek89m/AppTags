@@ -1,0 +1,39 @@
+
+@tags-container-padding: 10px 30px;
+@tags-ta-container-padding: 20px 0;
+@tags-ta-max-height: 300px;
+@tags-ta-min-height: 100px;
+@tags-ta-padding: 15px;
+@tag-list-bg-color: #f5f5f5;
+@tag-list-bd-radius: 6px;
+@tag-list-padding: 20px 0;
+@tag-list-min-height: 50px;
+
+.tags-container {
+  padding: @tags-container-padding;
+
+  .tags-textarea-container {
+    padding: @tags-ta-container-padding;
+
+    & > .tags-textarea {
+      resize: vertical;
+      max-height: @tags-ta-max-height;
+      min-height: @tags-ta-min-height;
+      padding: @tags-ta-padding;
+    }
+  }
+
+  .tag-list-container {
+    padding: @tag-list-padding;
+
+    & > ul.tags-list {
+      background-color: @tag-list-bg-color;
+      border-radius: @tag-list-bd-radius;
+      min-height: @tag-list-min-height;
+
+      & > li.tags-list__tag {
+        display: inline-block;
+      }
+    }
+  }
+}

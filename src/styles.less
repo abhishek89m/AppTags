@@ -1,0 +1,21 @@
+@import (inline) '../node_modules/bootstrap/dist/css/bootstrap-theme.css';
+@import (inline) '../node_modules/bootstrap/dist/css/bootstrap.css';
+
+@white: #ffffff;
+.no-spacing() {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: @white;
+  .no-spacing();
+}
+
+ul, li {
+  list-style: none;
+  .no-spacing();
+}
+
+/* Including app less files */
+@import 'app.view.less';
