@@ -20,8 +20,8 @@ Steps to run :
   1. Prerequisite - Need NodeJS, and NPM installed.
   2. Check for the versions of NodeJS and NPM through the -v option in terminal or powershell.
   3. Git clone the repo in filesystem and navigate to it in terminal or powershell.
-  4. Run the command 'npm start'
-  5. Open any browser (preferably Chrome) and go to 'http://localhost:8080/'
+  4. Run the command 'npm start'.
+  5. Open any browser (preferably Chrome) and go to 'http://localhost:8080/'. (If the port is already in use, then it can be changed in the server.js file of the project).
   6. The demo will run.
 
 Alternatively, after step 4, copy the contents of dist to webroot folder of any webservice like Apcahe Tomcat, and run it.
