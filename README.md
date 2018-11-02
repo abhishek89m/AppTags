@@ -4,7 +4,7 @@ Simple tags management app demo. Add, edit or delete tags.
 Functionalities are as follows :
   1. User can add tags by typing them into the text field, separated with comma, semicolon or line break, and pressing the button “Add tags”.
     * After  Add tags button is clicked, the text area is cleared.
-  2. Tags can only be numeric, and any tag entered with charaters will be omited.
+  2. Tags can only be numeric and unique. Any non-unique tags, or tags having characters will be omited.
   3. Tags with value less than 0 would be colored to blue, while tags with values more or equal to 0 would be colored to red.
   4. User can delete the tags on by one, by clicking on the cross button in the tag.
     * A prompt is shown to the user before deleting the tag, and the tag is deleted only if the user confirms.

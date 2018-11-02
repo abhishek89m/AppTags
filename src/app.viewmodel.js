@@ -73,12 +73,23 @@ function appViewModel() {
     }
 
     for (var index = 0; index < tagsArray.length; index++) {
+
       var tag = parseInt(tagsArray[index].trim());
+      var filteredTagList = [];
+
       if (tag !== '' && !isNaN(tag)) {
-        vm.tagsList.push({
-          tagLabel: tag,
-          tagColor: tag >= 0 ? 'redTag' : 'blueTag'
+
+        filteredTagList = ko.utils.arrayFilter(vm.tagsList(), function (tagO) {
+          return tagO.tagLabel == tag;
         });
+
+        // Pushing only if tag is unique.
+        if (filteredTagList.length === 0) {
+          vm.tagsList.push({
+            tagLabel: tag,
+            tagColor: tag >= 0 ? 'redTag' : 'blueTag'
+          });
+        }
       }
     }
   }
