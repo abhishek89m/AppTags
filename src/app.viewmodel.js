@@ -16,7 +16,7 @@ function appViewModel() {
   vm.tagsList = ko.observableArray(getTagsListFromCache());
   vm.showModal = ko.observable(false);
 
-  vm.showEditModel = function () {
+  vm.showEditModal = function () {
     if (vm.tagsList().length) {
       var tagLabelList = [];
       for (var index = 0; index < vm.tagsList().length; index++) {
